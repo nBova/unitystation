@@ -11,6 +11,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using NaughtyAttributes;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace UI.CharacterCreator
 {
@@ -1169,8 +1170,9 @@ namespace UI.CharacterCreator
 
 		private string TruncateName(string proposedName)
 		{
-			proposedName = proposedName.Trim();  // Trim whitespace off beginning and end, convert to Title Case to prevent all caps names
-			proposedName = textInfo.ToTitleCase(proposedName.ToLower());
+			proposedName = proposedName.Trim();  // Trim whitespace off beginning and end
+			proposedName = Regex.Replace(proposedName, " {2,}", " ");  // Regex to get rid of multiple spaces
+			proposedName = textInfo.ToTitleCase(proposedName.ToLower());  // Convert to Title Case to prevent all caps names
 			if (proposedName.Length >= CharacterSettings.MAX_NAME_LENGTH)
 			{
 				return proposedName.Substring(0, CharacterSettings.MAX_NAME_LENGTH);
