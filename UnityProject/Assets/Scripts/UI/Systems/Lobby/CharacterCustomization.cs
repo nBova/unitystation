@@ -1169,6 +1169,7 @@ namespace UI.CharacterCreator
 
 		private string TruncateName(string proposedName)
 		{
+			proposedName = proposedName.Trim();  // Trim whitespace off beginning and end, convert to Title Case to prevent all caps names
 			proposedName = textInfo.ToTitleCase(proposedName.ToLower());
 			if (proposedName.Length >= CharacterSettings.MAX_NAME_LENGTH)
 			{
